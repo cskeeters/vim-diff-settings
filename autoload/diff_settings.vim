@@ -15,16 +15,17 @@ function! diff_settings#enable()
         autocmd CursorMoved,CursorMovedI * diffupdate
     augroup END
 
+    set diffopt=internal,filler,context:1000000
 
-    tabdo windo diffthis
+    windo diffthis
 
     " Disable Folding
-    tabdo windo set nofoldenable foldcolumn=0
+    " windo set nofoldenable foldcolumn=0
 
     " Disable text hiding
-    tabdo windo set conceallevel=0
+    windo set conceallevel=0
 
-    " Reset the cursor the first change in the left window of each tab
+    " Reset the cursor the first change in the left window
     wincmd t
 
     norm! gg]c
@@ -35,7 +36,7 @@ function! diff_settings#disable()
         autocmd!
     augroup END
 
-    tabdo windo diffoff
+    windo diffoff
     wincmd t
 endfunction
 
